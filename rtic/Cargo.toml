@@ -30,6 +30,8 @@ esp32c3 = { version = "0.29.0", optional = true }
 esp32c6 = { version = "0.20.0", optional = true }
 riscv = { version = "0.14.0", optional = true }
 cortex-m = { version = "0.7.0", optional = true }
+arm-gic = { version = "0.6", optional = true }
+cortex-ar = { version = "0.2", optional = true }
 bare-metal = "1.0.0"
 portable-atomic = { version = "1", default-features = false }
 rtic-macros = { path = "../rtic-macros", version = "=2.2.0" }
@@ -58,6 +60,7 @@ thumbv6-backend = ["cortex-m", "rtic-macros/cortex-m-source-masking"]
 thumbv7-backend = ["cortex-m", "rtic-macros/cortex-m-basepri"]
 thumbv8base-backend = ["cortex-m", "rtic-macros/cortex-m-source-masking"]
 thumbv8main-backend = ["cortex-m", "rtic-macros/cortex-m-basepri"]
+gicv3-backend = ["arm-gic", "cortex-ar", "rtic-macros/gicv3"]
 # riscv-clic-backend = ["rtic-macros/riscv-clic"]
 # riscv-ch32-backend = ["rtic-macros/riscv-ch32"]
 riscv-esp32c3-backend = ["esp32c3", "riscv", "rtic-macros/riscv-esp32c3"]

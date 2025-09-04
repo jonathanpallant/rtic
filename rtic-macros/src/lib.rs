@@ -14,6 +14,7 @@ macro_rules! with_backend {
             feature = "cortex-m-source-masking",
             feature = "cortex-m-basepri",
             feature = "test-template",
+            feature = "gicv3",
             feature = "riscv-esp32c3",
             feature = "riscv-esp32c6",
             feature = "riscv-slic",
@@ -121,5 +122,6 @@ with_backend! {
     feature = "riscv-esp32c3",
     feature = "riscv-esp32c6",
     feature = "riscv-slic",
+    feature = "gicv3",
 )))]
 compile_error!("Cannot compile. No backend feature selected.");

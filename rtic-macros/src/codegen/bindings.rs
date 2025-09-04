@@ -5,17 +5,18 @@
     feature = "riscv-esp32c3",
     feature = "riscv-esp32c6",
     feature = "riscv-slic",
+    feature = "gicv3",
 )))]
 compile_error!("No backend selected");
 
 #[cfg(any(feature = "cortex-m-source-masking", feature = "cortex-m-basepri"))]
 pub use cortex::*;
 
-#[cfg(feature = "test-template")]
-pub use template::*;
-
 #[cfg(any(feature = "cortex-m-source-masking", feature = "cortex-m-basepri"))]
 mod cortex;
+
+#[cfg(feature = "test-template")]
+pub use template::*;
 
 #[cfg(feature = "test-template")]
 mod template;
@@ -37,3 +38,9 @@ pub use riscv_slic::*;
 
 #[cfg(feature = "riscv-slic")]
 mod riscv_slic;
+
+#[cfg(feature = "gicv3")]
+pub use gicv3::*;
+
+#[cfg(feature = "gicv3")]
+mod gicv3;

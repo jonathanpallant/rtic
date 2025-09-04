@@ -45,6 +45,12 @@ mod slic;
 #[cfg(feature = "riscv-slic")]
 pub use slic::*;
 
+#[cfg(feature = "gicv3")]
+pub mod gicv3;
+
+#[cfg(feature = "gicv3")]
+pub use gicv3::*;
+
 #[inline(always)]
 pub fn assert_send<T: Send>() {}
 

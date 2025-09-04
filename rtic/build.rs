@@ -33,6 +33,9 @@ fn main() {
         "riscv-clint-backend" | "riscv-mecall-backend" => {
             println!("cargo:rustc-cfg=feature=\"riscv-slic\"");
         }
+        "gicv3-backend" => {
+            println!("cargo:rustc-cfg=feature=\"gicv3\"");        
+        }
         _ => {
             panic!("Unknown backend feature: {backend:?}");
         }
