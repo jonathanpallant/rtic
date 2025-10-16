@@ -1,0 +1,3 @@
+[toolchain]
+channel = "nightly"
+targets = [ "armv8r-none-eabihf" ]

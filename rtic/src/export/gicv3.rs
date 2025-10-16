@@ -1,4 +1,4 @@
-use arm_gic::gicv3::GicV3;
+use arm_gic::gicv3::GicCpuInterface;
 
 pub mod interrupt {
     #[inline]
@@ -23,11 +23,11 @@ where
     if priority == 1 {
         // If the priority of this interrupt is `1` then PMR can only be `0`
         f();
-        GicV3::set_priority_mask(0);
+        GicCpuInterface::set_priority_mask(0);
     } else {
-        let initial = GicV3::get_priority_mask();
+        let initial = GicCpuInterface::get_priority_mask();
         f();
-        unsafe { GicV3::set_priority_mask(initial) }
+        GicCpuInterface::set_priority_mask(initial);
     }
 }
 
@@ -43,13 +43,13 @@ pub unsafe fn lock<T, R>(
     ceiling: u8,
     f: impl FnOnce(&mut T) -> R,
 ) -> R {
-    let current = GicV3::get_priority_mask();
+    let current = GicCpuInterface::get_priority_mask();
     // Only interrupts with a higher priority (numerically lower) will be signalled.
     // Priorities in RTIC follow a higher value = more important scheme, so invert.
-    GicV3::set_priority_mask(u8::MAX - ceiling);
+    GicCpuInterface::set_priority_mask(u8::MAX - ceiling);
     let r = unsafe {
         f(&mut *ptr)
     };
-    GicV3::set_priority_mask(current);
+    GicCpuInterface::set_priority_mask(current);
     r
 }
